@@ -21,9 +21,6 @@ function App() {
     complaints: []
   });
 
-  // ============================
-  // Recuperar sesión al cargar
-  // ============================
   useEffect(() => {
     const savedUser = localStorage.getItem("user");
     const savedToken = localStorage.getItem("token");
@@ -35,27 +32,18 @@ function App() {
     }
   }, []);
 
-  // ============================
-  // Cargar datos al iniciar sesión
-  // ============================
   useEffect(() => {
     if (currentUser) {
       loadData();
     }
   }, [currentUser]);
 
-  // ============================
-  // Manejo de expiración del token
-  // ============================
   const handleApiError = (error) => {
     if (error?.unauthorized) {
       handleLogout();
     }
   };
 
-  // ============================
-  // Cargar datos
-  // ============================
   const loadData = async () => {
     try {
       setLoading(true);
@@ -85,9 +73,6 @@ function App() {
     }
   };
 
-  // ============================
-  // Login
-  // ============================
   const handleLogin = async (email, password) => {
     try {
       setLoading(true);
@@ -116,9 +101,6 @@ function App() {
     }
   };
 
-  // ============================
-  // Logout
-  // ============================
   const handleLogout = () => {
     api.logout();
     localStorage.removeItem("user");
@@ -128,9 +110,6 @@ function App() {
     setData({ users: [], services: [], bookings: [], complaints: [] });
   };
 
-  // ============================
-  // Render
-  // ============================
   if (!currentUser) {
     if (view === "register") {
       return <Register setView={setView} />;
