@@ -82,7 +82,9 @@ function App() {
         id: response.id,
         email: response.email,
         nombre: response.nombre,
-        role: response.role
+        role: response.role,
+        activo: response.activo,
+        telefono: response.telefono
       };
 
       localStorage.setItem("user", JSON.stringify(user));
