@@ -5,9 +5,6 @@ import * as api from '../services/api';
 const Bookings = ({ data, setData, currentUser, loadData }) => {
   const [loading, setLoading] = useState(false);
 
-  // ============================
-  //  FILTRADO OPTIMIZADO
-  // ============================
   const bookings = useMemo(() => {
     const allBookings = data?.bookings || [];
     const services = data?.services || [];
@@ -27,9 +24,6 @@ const Bookings = ({ data, setData, currentUser, loadData }) => {
     return allBookings; // admin
   }, [data, currentUser]);
 
-  // ============================
-  //  CAMBIO DE ESTADO
-  // ============================
   const handleChangeBookingStatus = async (bookingId, newStatus) => {
     try {
       setLoading(true);
@@ -44,9 +38,6 @@ const Bookings = ({ data, setData, currentUser, loadData }) => {
     }
   };
 
-  // ============================
-  //  ESTILOS Y LABELS
-  // ============================
   const getStatusColor = (status) => {
     const colors = {
       pendiente: 'bg-yellow-100 text-yellow-800',
@@ -96,9 +87,7 @@ const Bookings = ({ data, setData, currentUser, loadData }) => {
               key={booking.id}
               className="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition"
             >
-              {/* ============================
-                  CABECERA
-              ============================ */}
+              {/*CABECERA*/}
               <div className="flex justify-between items-start mb-4">
                 <div className="flex-1">
                   <h3 className="text-xl font-bold text-gray-800">
@@ -128,17 +117,13 @@ const Bookings = ({ data, setData, currentUser, loadData }) => {
                 </span>
               </div>
 
-              {/* ============================
-                  FECHA
-              ============================ */}
+              {/*FECHA*/}
               <div className="flex items-center text-gray-600 mb-4">
                 <Calendar size={16} className="mr-2" />
                 <span>Fecha: {formatDate(booking.fecha)}</span>
               </div>
 
-              {/* ============================
-                  DETALLES DEL SERVICIO
-              ============================ */}
+              {/*DETALLES DEL SERVICIO*/}
               {service && (
                 <div className="mb-4 p-3 bg-gray-50 rounded-lg">
                   <p className="text-sm text-gray-600">{service.descripcion}</p>
@@ -148,9 +133,7 @@ const Bookings = ({ data, setData, currentUser, loadData }) => {
                 </div>
               )}
 
-              {/* ============================
-                  ACCIONES SEGÚN ESTADO
-              ============================ */}
+              {/*ACCIONES SEGÚN ESTADO*/}
               {(currentUser.role === 'admin' ||
                 currentUser.role === 'profesional') &&
                 booking.estado === 'pendiente' && (
@@ -205,9 +188,7 @@ const Bookings = ({ data, setData, currentUser, loadData }) => {
                   </button>
                 )}
 
-              {/* ============================
-                  VALORACIÓN DEL CLIENTE
-              ============================ */}
+              {/*VALORACIÓN DEL CLIENTE*/}
               {booking.estado === 'finalizado' &&
                 currentUser.role === 'cliente' &&
                 !booking.valoracion && (
@@ -250,9 +231,7 @@ const Bookings = ({ data, setData, currentUser, loadData }) => {
         })}
       </div>
 
-      {/* ============================
-          SIN RESERVAS
-      ============================ */}
+      {/*SIN RESERVAS*/}
       {bookings.length === 0 && (
         <div className="text-center py-12">
           <Calendar size={48} className="mx-auto text-gray-400 mb-4" />
